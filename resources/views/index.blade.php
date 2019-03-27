@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+{{-- @section('content')
   @include('partials.page-header')
 
   @if (!have_posts())
@@ -15,4 +15,6 @@
   @endwhile
 
   {!! get_the_posts_navigation() !!}
-@endsection
+
+
+@endsection --}}

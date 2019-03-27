@@ -33,9 +33,9 @@ module.exports = {
   },
   'rules': {
     'no-console': 0,
-    'quotes': ['error', 'single'],
+    'quotes': ['warn', 'single'],
     'comma-dangle': [
-      'error',
+      'warn',
       {
         'arrays': 'always-multiline',
         'objects': 'always-multiline',

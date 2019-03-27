@@ -8,9 +8,9 @@
       "./scripts/customizer.js"
     ]
   },
-  "publicPath": "/app/themes/sage",
-  "devUrl": "http://example.test",
+  "publicPath": "/my/wp-content/themes/custom_sage",
   "proxyUrl": "http://localhost:3000",
+  "devUrl": "http://localhost/my",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [
     "app/**/*.php",
