@@ -1,5 +1,6 @@
 // import external dependencies
 import 'jquery';
+import Barba from 'barba.js';
 
 // Import everything from autoload
 import './autoload/**/*'
@@ -21,4 +22,10 @@ const routes = new Router({
 });
 
 // Load Events
-jQuery(document).ready(() => routes.loadEvents());
+jQuery(document).ready(() => {
+  Barba.Pjax.start()
+  routes.loadEvents()
+  Barba.Dispatcher.on('newPageReady', () => {
+    routes.loadEvents()
+  });
+});

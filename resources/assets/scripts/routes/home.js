@@ -14,7 +14,7 @@ export default {
     renderer.setSize( window.innerWidth, window.innerHeight );
     
     //camera
-    let camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    let camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 1000 );
     const mouse = new THREE.Vector2();
     const targetSmallCircle = new THREE.Vector2();
     const targetCamera = new THREE.Vector2();
@@ -25,7 +25,7 @@ export default {
     let loader = new GLTFLoader();
     let material = new THREE.MeshLambertMaterial({ color: 0x282d3c });
     let lamp = new THREE.HemisphereLight( 0x282d3c, 0x080820, 1 );
-    let directionalLamp = new THREE.DirectionalLight({ color: 0x282d3c, position: (-20,-20,-10) });
+    let directionalLamp = new THREE.DirectionalLight({ color: 0x282d3c });
     directionalLamp.target.z = -20;
     scene.add( camera, lamp, directionalLamp );
     
@@ -51,7 +51,7 @@ export default {
     document.addEventListener( 'mousemove', onMouseMove, false );
     document.addEventListener( 'touchmove', onTouchMove, false );
     window.addEventListener( 'resize', onResize, false );
-    document.body.appendChild(renderer.domElement);
+    $('main').append(renderer.domElement);
     
     //render
     const animate = () => {
@@ -67,6 +67,7 @@ export default {
       small_circle.rotation.y += 0.01 * ( targetSmallCircle.x - small_circle.rotation.y );
       circle.rotation.x += 0.01 * ( targetCircle.y - circle.rotation.x );
       circle.rotation.y += 0.01 * ( targetCircle.x - circle.rotation.y );
+      if(window.innerWidth >= 768) camera.fov = 45; 
       requestAnimationFrame( animate );
       renderer.render( scene, camera );
     }
@@ -84,7 +85,6 @@ export default {
           small_circle.position.z = -20;
           circle.position.z = -20;
           logotype.position.z = -20;
-          console.log(logotype.material);
           animate();
       },
       ( xhr ) => {
@@ -100,7 +100,7 @@ export default {
   },
   finalize() {
     // JavaScript to be fired on the home page, after the init JS
-
+    
     //header home style
     const margin = $('html').attr('margin');
     $('header').css({ 

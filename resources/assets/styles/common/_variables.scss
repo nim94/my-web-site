@@ -1,9 +1,18 @@
 /** Import Bootstrap functions */
-@import "~bootstrap/scss/functions";
+@import '~bootstrap/scss/functions';
 
 $theme-colors: (
   primary: #282d3c,
-  secondary: #f0ede5
+  secondary: #f0ede5,
+  tertiary: #fa7268
+);
+
+$theme-breakpoints: (
+  small-phone: 320px,
+  phone: 567px,
+  tablets: 768px,
+  notebook: 992px,
+  desktop: 1200px,
 );
 
 /** Bootstrap navbar fix (https://git.io/fADqW) */

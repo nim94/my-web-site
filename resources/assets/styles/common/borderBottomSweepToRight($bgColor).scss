@@ -1,0 +1,16 @@
+@mixin borderBottomSweepToRight($bgColor) {
+    display: inline-block;
+    text-decoration: none;
+	&:after {
+		content: '';
+		display: block;
+		width: 0;
+		height: 2px;
+		background: $bgColor;
+		transition: width .3s;
+	}
+	&:hover::after {
+		width: 100%;
+		//transition: width .3s;
+	}
+}
