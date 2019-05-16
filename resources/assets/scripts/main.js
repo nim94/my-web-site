@@ -9,23 +9,28 @@ import './autoload/**/*'
 import Router from './util/Router';
 import common from './routes/common';
 import home from './routes/home';
-import aboutUs from './routes/about';
 
 /** Populate Router instance with DOM routes */
-const routes = new Router({
+const initialRoute = new Router({
   // All pages
   common,
+});
+const routes = new Router({
   // Home page
   home,
-  // About Us page, note the change from about-us to aboutUs.
-  aboutUs,
 });
 
 // Load Events
 jQuery(document).ready(() => {
-  Barba.Pjax.start()
+  // loading initial routes
+  initialRoute.loadEvents()
   routes.loadEvents()
+  
+  // initialize Barba.js
+  Barba.Pjax.start()
+  Barba.Prefetch.init()
   Barba.Dispatcher.on('newPageReady', () => {
+    // fire single pages routes
     routes.loadEvents()
   });
 });

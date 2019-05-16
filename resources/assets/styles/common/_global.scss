@@ -1,13 +1,22 @@
-//barba
 
-.page-chi-sono-data{
-    main{
-        background-color: red;
-    }
+body {
+    background: map-get($map: $theme-colors, $key: primary);
+    overflow-x: hidden;
 }
 
-.page-works-data{
-    main{
-        background-color: blue;
-    }
+h1,
+h2,
+h3 {
+    font-family: 'peace-sans', 'sans-serif';
+}
+
+p,
+li {
+    font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+}
+
+a,
+input,
+button {
+    outline: none;
 }

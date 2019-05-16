@@ -1,0 +1,38 @@
+aside.sidebar {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: tablets)) {
+        position: static;
+        transform: none;
+        display: flex;
+        flex:1;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .widget {
+        h3 {
+            color: map-get($map: $theme-colors, $key: secondary);
+        }
+
+        ul {
+            li {
+                list-style-type: none;
+
+                a {
+                    transition: 300ms;
+                    font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+                    color: map-get($map: $theme-colors, $key: tertiary);
+                    text-decoration: none;
+                
+                    &:hover {
+                      color: map-get($map: $theme-colors, $key: secondary);
+                    }
+                  }
+            }
+        }
+    }
+}

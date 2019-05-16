@@ -1,14 +1,659 @@
-/* home */
 
-html,
-body {
+// home
+body.home {
   height: 100%;
   margin: 0;
-  overflow: hidden;
+
+  canvas {
+    width: 100%;
+    height: 100% !important;
+    display: block;
+  }
+
+  .hidden {
+    opacity:0;
+  }
+
+  .console-container {
+    font-family: courier, monospace;
+    font-size:18px;
+    text-align:center;
+    height:50px;
+    width:100%;
+    display:block;
+    position:absolute;
+    color: map-get($map: $theme-colors, $key: secondary);
+    bottom:0;
+    left:0;
+    margin:auto;
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)){
+      bottom: unset;
+      top: 100px;
+      font-size:22px;
+    }
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)){
+      width: 800px;
+      font-size:26px;
+    }
+  }
+
+  .console-underscore {
+    display:inline-block;
+    height: 7px;
+    position:relative;
+    top:-0.14em;
+    left:10px;
+  }
 }
 
-canvas {
-  width: 100%;
-  height: 100%;
+// generic
+div.title-wrapper {
+  display:flex;
+  align-items:center;
+
+  h1.title {
+    display: inline-block;
+    margin: 40px auto 20px auto;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 60px;
+    position: static;
+    color: map-get($map: $theme-colors, $key: tertiary);
+    background-color: map-get($map: $theme-colors, $key: primary);
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      font-size: 150px;
+      position: relative;
+      margin: 200px auto 100px auto;
+      padding: 0 50px;
+    }
+
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 10px;
+      left: -50%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: map-get($map: $theme-colors, $key: secondary);
+      z-index: -2;
+
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+        display: block;
+      }
+    }
+  }
+
+  span.title-span {
+    display: none;
+    height: 10px;
+    width: 40vw;
+    background:map-get($map: $theme-colors, $key: secondary);
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      display: inline-block;
+    }
+  }
+}
+
+div.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px 10px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 22px;
+    color: map-get($map: $theme-colors, $key: secondary);
+
+    &.chi_sono {
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+        flex-direction: row;
+      }
+
+      p {
+        @media (min-width: map-get($map: $theme-breakpoints, $key: tablets)) {
+          display: inline-block;
+          width: 70%;
+          margin: 10px 30px 20px 30px;
+          font-size: 22px;
+          letter-spacing: 1px;
+          line-height: 26px;
+        }
+      }
+
+      img.mia-foto {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 10px auto 20px auto;
+      border-radius: 5px;
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+      @media (min-width: map-get($map: $theme-breakpoints, $key: phone)) {
+        width: 80%;
+      }
+
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+        display: inline-block;
+        margin: 10px 30px 20px 30px;
+        width: 1000px;
+        height: auto;
+      }
+    }
+  }
+}
+
+div.chi_sono.title-servizi-wrapper {
+  display: flex;
+  align-items: center;
+
+  h2.chi_sono.title-servizi {
+    display: block;
+    margin: 40px auto 20px auto;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 70px;
+    position: static;
+    color: map-get($map: $theme-colors, $key: tertiary);
+    background-color: map-get($map: $theme-colors, $key: primary);
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      display: inline-block;
+      padding: 0 50px;
+      font-size: 80px;
+      position: relative;
+    }
+
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 10px;
+      left: -100%;
+      top: 80%;
+      transform: translateY(-50%);
+      background-color: map-get($map: $theme-colors, $key: secondary);
+      z-index: -2;
+
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+        display: block;
+      }
+    }
+  }
+
+  span.chi_sono.title-servizi-span {
+    display: none;
+    height: 10px;
+    width: 50%;
+    background: map-get($map: $theme-colors, $key: secondary);
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      display:inline-block;
+    }
+  }
+}
+
+ul.chi_sono.lista-servizi {
   display: block;
+  margin: 50px auto;
+  position: static;
+  left: 100px;
+  list-style: none;
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+    margin: 100px auto;
+    position: relative;
+  }
+
+  li {
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 40px;
+    color: map-get($map: $theme-colors, $key: secondary);
+    text-decoration: none;
+
+    & ul.chi_sono.servizi-web_development {
+      list-style: none;
+
+      li {
+
+      }
+    }
+  }
+}
+
+// works
+
+body {
+  .work {
+    text-align: center;
+
+    a {
+      display: block;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .work-wrapper {
+        position: relative;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        margin: 20px auto;
+
+        &::after {
+          content: '';
+          transition: all 0.2s;
+          position: absolute;
+          display: block;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 150px;
+          background-image: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+          z-index: 10;
+
+          @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+            height: 0;
+          }
+        }
+
+        @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+          &:hover::after {
+            position: absolute;
+            display: block;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background-image: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0));
+            z-index: 10;
+          }
+        }
+
+        &:hover span.work-title {
+          @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+            display: inline;
+          }
+        } 
+
+        span.work-title {
+          font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+          font-weight: 700;
+          color: map-get($map: $theme-colors, $key: secondary);
+          position: absolute;
+          bottom: 10px;
+          left: 0;
+          right: 0;
+          z-index: 100;
+
+          @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+            display: none;
+          }
+        }
+    
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+        }
+      } 
+    }   
+  }
+}
+
+// single-works
+
+.thumbnail-img {
+  width: 100%;
+  margin: 40px auto 20px auto;
+
+  img {
+    border-radius: 5px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: tablets)) {
+    width: 70%;
+
+  }
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+    width: 50%;
+  }
+}
+
+h1.single_works.title {
+  font-size: 40px !important;
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+    font-size: 70px !important;
+  }
+}
+
+.single_works.content {
+  font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+  margin: 40px auto 20px auto;
+}
+
+// contatti
+
+.contatti-wrapper {
+  text-align: center;
+
+  .contatti.lista-contatti {
+    display: inline-flex;
+    margin: 0 auto;
+    flex: 1;
+    flex-direction: column;
+    // align-items: center;
+
+    div {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      margin: 10px auto;
+
+      &:hover a {
+        color: map-get($map: $theme-colors, $key: tertiary);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      img {
+        width: 3em;
+        height: 3em;
+        margin: 10px;
+      }
+      
+      span,
+      a {
+        transition: 300ms;
+        font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+        text-align: left;
+        font-size: 20px;
+        color: map-get($map: $theme-colors, $key: secondary);
+
+        @media (min-width: map-get($map: $theme-breakpoints, $key: tablets)) {
+          font-size: 22px;
+        }
+
+        @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+// privacy-policy
+
+body.privacy-policy {
+  @media (min-width: map-get($map: $theme-breakpoints, $key: tablets)) {
+    margin: 20px;
+  }
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+    margin: 50px;
+  }
+
+  div.content {
+    a {
+      transition: 300ms;
+      font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+      color: map-get($map: $theme-colors, $key: secondary);
+      font-style: italic;
+      text-decoration: none;
+  
+      &:hover {
+        color: map-get($map: $theme-colors, $key: tertiary);
+      }
+    }
+  }
+}
+
+//single-blog
+
+div.entry-meta {
+  font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+}
+
+.byline {
+  a {
+    transition: 300ms;
+    font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+    color: map-get($map: $theme-colors, $key: tertiary);
+    text-decoration: none;
+
+    &:hover {
+      color: map-get($map: $theme-colors, $key: secondary);
+    }
+  }
+}
+
+.byline,
+.updated {
+  font-style: italic;
+}
+
+.entry-content {
+  p {
+    margin: 50px auto;
+  }
+}
+
+section#comments {
+  margin: 50px auto auto auto;
+
+  textarea#comment,
+  input#author,
+  input#email {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 5px;
+    color: map-get($map: $theme-colors, $key: secondary);
+  }
+
+  input#submit {
+    display: block;
+    border-radius: 10000px;
+    transition: 300ms;
+    border: none;
+    margin: 20px auto;
+
+    &:hover {
+      background: map-get($map: $theme-colors, $key: tertiary);
+      color: map-get($map: $theme-colors, $key: secondary);
+    }
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      display: inline;
+    }
+  }
+
+  /* checkbox */
+.comment-form-cookies-consent {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px 20px 0 0;
+  background: #fcfff4;
+  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+
+  label:not(.fake-checkbox) {
+    width: 70vw;
+    position: relative;
+    top: -5px;
+    left: 45px;
+
+    @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+      width: 40vw;
+      top: 0;
+    }
+  }
+  
+  label.fake-checkbox {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    cursor: pointer;
+    background: map-get($map: $theme-colors, $key: primary);
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+
+    &::after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      border: 3px solid map-get($map: $theme-colors, $key: secondary);
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+      transition: 100ms;
+    }
+  }
+
+  input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+    top: 7px;
+    left: 7px;  
+    z-index: 10;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover ~ label.fake-checkbox::after {
+      opacity: 0.3;
+    }
+
+    &:checked ~ label.fake-checkbox::after {
+      opacity: 1;
+    } 
+  }   
+}
+/* end checkbox */
+span.labelForCheckbox {
+  font-family: 'Anonymous Pro', 'arial', 'sans-serif';
+}
+
+// comment wrapper logic
+div.comment-wrapper {
+  @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
+    display: flex;
+    flex: 1;
+
+    div.sub-comment-wrapper {
+      display: block;
+      width: 49%;
+      padding: 20px;
+    }
+  }
+}
+
+}
+
+p.logged-in-as {
+  a {
+    color: map-get($map: $theme-colors, $key: secondary);
+  }
+}
+
+//commenti
+.comment-list {
+  .comment-metadata {
+    display: none;
+  }
+
+  a {
+    color: map-get($map: $theme-colors, $key: tertiary);
+    margin: 20px;
+    font-style: italic;
+    transition: 300ms;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+      color: map-get($map: $theme-colors, $key: secondary);  
+    }
+  }
+}
+
+//social share social pug plugin
+ul.dpsp-networks-btns-wrapper.dpsp-networks-btns-content.dpsp-has-button-icon-animation {
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: map-get($map: $theme-breakpoints, $key: social_pug_switch)) {
+    display: none;
+  }
+}
+
+//cookie banner
+.cc-window.cc-floating.cc-type-info.cc-theme-edgeless.cc-bottom.cc-left.cc-color-override--1762072787 {
+  border-radius: 10px;
+  background-color: map-get($map: $theme-colors, $key: secondary);
+  color: map-get($map: $theme-colors, $key: primary);
+  margin: 20px;
+
+  .cc-compliance {
+    .cc-btn.cc-dismiss {
+      background-color: map-get($map: $theme-colors, $key: tertiary);
+      color: map-get($map: $theme-colors, $key: primary);
+      transition: 300ms;
+
+      &:hover {
+        text-decoration: none;
+        background-color: map-get($map: $theme-colors, $key: secondary);
+        color: map-get($map: $theme-colors, $key: primary);
+      }
+    }  
+  }
+}
+
+//search 
+body.search {
+  article {
+    margin-bottom: 100px;
+  }
+
+  a {
+    color: map-get($map: $theme-colors, $key: secondary);
+    transition: 300ms;
+    text-decoration: none;
+  }
+
+  .entry-summary {
+    a.more-link {
+      color: map-get($map: $theme-colors, $key: tertiary);
+      margin: 0 0 0 20px;
+      
+      &:hover {
+        color: map-get($map: $theme-colors, $key: secondary);
+      }
+    }
+  }
 }

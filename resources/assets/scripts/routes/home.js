@@ -1,13 +1,14 @@
 import * as THREE from 'three'
 import GLTFLoader from 'three-gltf-loader'
-import { url } from '../config' 
+import { url } from '../config'
+import consoleText from '../consoleTextEffect';
 
 export default {
   init() {
     // JavaScript to be fired on the home page
     
     //scene
-    let small_circle, circle, logotype;
+    let logo;
     let scene = new THREE.Scene();
     let renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setClearColor(0x282d3c);
@@ -16,17 +17,18 @@ export default {
     //camera
     let camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 1000 );
     const mouse = new THREE.Vector2();
-    const targetSmallCircle = new THREE.Vector2();
+    const targetLogo = new THREE.Vector2();
     const targetCamera = new THREE.Vector2();
-    const targetCircle = new THREE.Vector2();
     const windowHalf = new THREE.Vector2( window.innerWidth / 2, window.innerHeight / 2 );
     
     //meshes
     let loader = new GLTFLoader();
     let material = new THREE.MeshLambertMaterial({ color: 0x282d3c });
     let lamp = new THREE.HemisphereLight( 0x282d3c, 0x080820, 1 );
-    let directionalLamp = new THREE.DirectionalLight({ color: 0x282d3c });
-    directionalLamp.target.z = -20;
+    let directionalLamp = new THREE.DirectionalLight({ color: 0x2ACCFF });
+    directionalLamp.position.x += 300 ;
+    directionalLamp.position.y += 90;
+    directionalLamp.position.z += 50;
     scene.add( camera, lamp, directionalLamp );
     
     //events
@@ -55,18 +57,14 @@ export default {
     
     //render
     const animate = () => {
-      targetSmallCircle.x = ( 1 - mouse.x ) * 0.005;
-      targetSmallCircle.y = ( 1 - mouse.y ) * 0.005;
-      targetCamera.x = ( 1 - mouse.x ) * 0.000025;
-      targetCamera.y = ( 1 - mouse.y ) * 0.000025;
-      targetCircle.x = ( 1 - mouse.x ) * 0.002;
-      targetCircle.y = ( 1 - mouse.y ) * 0.002;
+      targetCamera.x = ( 1 - mouse.x ) * 0.00005;
+      targetCamera.y = ( 1 - mouse.y ) * 0.00005;
+      targetLogo.x = ( 1 - mouse.x ) * 0.005;
+      targetLogo.y = ( 1 - mouse.y ) * 0.005;
       camera.rotation.x += 0.1 * ( targetCamera.y - camera.rotation.x );
       camera.rotation.y += 0.1 * ( targetCamera.x - camera.rotation.y );
-      small_circle.rotation.x += 0.01 * ( targetSmallCircle.y - small_circle.rotation.x );
-      small_circle.rotation.y += 0.01 * ( targetSmallCircle.x - small_circle.rotation.y );
-      circle.rotation.x += 0.01 * ( targetCircle.y - circle.rotation.x );
-      circle.rotation.y += 0.01 * ( targetCircle.x - circle.rotation.y );
+      logo.rotation.x += 0.0025 * ( targetLogo.y - logo.rotation.x );
+      logo.rotation.y += 0.0025 * ( targetLogo.x - logo.rotation.y );
       if(window.innerWidth >= 768) camera.fov = 45; 
       requestAnimationFrame( animate );
       renderer.render( scene, camera );
@@ -77,14 +75,11 @@ export default {
       `${url}dist/images/3dLogo.gltf`,
       ( gltf ) => {
           // called when the resource is loaded
-          small_circle = gltf.scene.children[2];
-          circle = gltf.scene.children[3];
-          logotype = gltf.scene.children[4]
-          small_circle.material = circle.material = logotype.material = material;
-          scene.add( small_circle, circle, logotype );
-          small_circle.position.z = -20;
-          circle.position.z = -20;
-          logotype.position.z = -20;
+          logo = gltf.scene.children[2];
+          logo.material = material;
+          scene.add( logo );
+          logo.position.z = -20;
+          logo.position.y += 1;
           animate();
       },
       ( xhr ) => {
@@ -100,14 +95,9 @@ export default {
   },
   finalize() {
     // JavaScript to be fired on the home page, after the init JS
+
+    // terminal text effect
+    consoleText(['Nicola Morelli', 'Creative web developer'], 'text', ['#f0ede5']);
     
-    //header home style
-    const margin = $('html').attr('margin');
-    $('header').css({ 
-      'position': 'absolute', 
-      'left': 0, 
-      'top': margin, 
-      'background-color': 'transparent', 
-    });
   },
 };

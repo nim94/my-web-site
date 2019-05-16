@@ -132,3 +132,35 @@ add_action('after_setup_theme', function () {
     });
         
 });
+
+add_action('init', function(){
+
+    $args = array(
+        'labels'             => array( 
+            'name'                          => 'Works', 
+            'singular_name'                 => 'Work',
+            'add_new'                       => 'Aggiungi nuovo Work', 
+            'add_new_item'                  => 'Aggiungi nuovo Work', 
+            'new_item'                      => 'Nuovo Work',
+            'edit_item'                     => 'Modifica Work',
+            'view_item'                     => 'Visualizza Work',
+            'all_items'                     => 'Tutti gli Works',
+        ),
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'works' ),
+        'capability_type'    => 'post',
+        'has_archive'        => false,
+        'hierarchical'       => false,
+        'menu_position'      => null,
+        'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+        'menu_icon'          => 'dashicons-universal-access',
+    );
+
+    register_post_type( 'works', $args );
+    
+});
+

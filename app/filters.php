@@ -27,13 +27,6 @@ add_filter('body_class', function (array $classes) {
 });
 
 /**
- * Add "… Continued" to the excerpt
- */
-add_filter('excerpt_more', function () {
-    return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
-});
-
-/**
  * Template Hierarchy should search for .blade.php files
  */
 collect([
@@ -89,3 +82,50 @@ add_filter('comments_template', function ($comments_template) {
 
     return $comments_template;
 }, 100);
+
+//sidebar display in blog posts
+add_filter('sage/display_sidebar', function ($display) {
+    static $display;
+
+    isset($display) || $display = in_array(true, [
+      // The sidebar will be displayed if any of the following return true
+      is_singular('post')
+    ]);
+
+    return $display;
+});
+
+//navbar-primary add items
+add_filter( 'wp_nav_menu_items', function ( $items, $args ) {
+    if ($args->theme_location == 'primary_navigation') {
+        ob_start();
+        get_search_form();
+        $searchform = ob_get_contents();
+        ob_end_clean();
+
+        $items .= 
+        '<li><a href="https://www.facebook.com/nicola.morelli.94" class="social_nav_link facebook">
+        <img src="'. get_stylesheet_directory_uri() .'/../dist/images/facebook_icon_hover.png" alt="facebook icon" class="social_nav_img_hover">
+        <img src="'. get_stylesheet_directory_uri() .'/../dist/images/facebook_icon.png" alt="facebook icon" class="social_nav_img">
+        </a></li>
+        <li><a href="https://www.instagram.com/nicomorelli94/" class="social_nav_link instagram">
+        <img src="'. get_stylesheet_directory_uri() .'/../dist/images/instagram_icon_hover.png" alt="facebook icon" class="social_nav_img_hover">
+        <img src="'. get_stylesheet_directory_uri() .'/../dist/images/instagram_icon.png" alt="facebook icon" class="social_nav_img">
+        </a></li>
+        <li class="search-form"><img src="'. get_stylesheet_directory_uri() .'/../dist/images/search-icon.png" class="search-icon" alt="ricerca">'. $searchform .'</li>';
+    }
+    return $items;
+}, 10, 2 );
+
+//customize read more link
+add_filter( 'excerpt_more', function() {
+    return '<a class="more-link" href="' . get_permalink() . '">'. __('...Continua a leggere', 'sage') .'</a>';
+});
+
+//comment form cookie mail and name unchecked
+add_filter( 'comment_form_default_fields', function( $fields ) {
+    unset( $fields['url'] );
+    $fields['cookies'] = '<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />' .
+					 '<label for="wp-comment-cookies-consent">' . __( 'Salva il mio nome e la mia email in un cookie per il prossimo commento', 'sage' ) . '</label></p>';
+	return $fields;
+});

@@ -3,9 +3,8 @@
 @section('content')
 
   @if (!have_posts())
-    <div class="alert alert-warning">
-      {{ __('Sorry, but the page you were trying to view does not exist.', 'sage') }}
-    </div>
-    {!! get_search_form(false) !!}
+    <p>
+      {{ __('Ooops, qualcosa è andato storto! La pagina che stai cercando non esiste', 'sage') }}
+    </p>
   @endif
 @endsection

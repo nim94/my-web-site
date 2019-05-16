@@ -95,8 +95,13 @@ header {
       display: flex;
       justify-content: flex-end;
 
-      @media (min-width: map-get($map: $theme-breakpoints, $key: notebook)) {
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
         display: none;
+      }
+
+      .navbar-toggler {
+        position: relative;
+        top: 30px;
       }
 
       #navbarSupportedContent20 {
@@ -105,6 +110,70 @@ header {
             display: flex;
             flex-direction: column;
             align-items: center;
+
+            li {
+              &.current_page_item a {
+                color: map-get($map: $theme-colors, $key: tertiary);
+              }
+
+              a.social_nav_link {
+                position: relative;
+                margin: 15px 0; 
+    
+                img {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  transition: 300ms;
+                  width: 30px;
+                  height: 30px;
+                  display: inline-block;
+    
+                  &.social_nav_img:hover {
+                    opacity: 0;
+                  }
+                }
+              }
+
+              img.search-icon {
+                display: none;
+              }
+
+              form.search-form {
+                margin: 20px 0 0 0;
+
+                label {
+                  margin: 0;
+                }
+
+                input {
+                  border: none;
+                  transition: 300ms;
+                  margin: 20px 0;
+        
+                  &.search-submit {
+                    padding: 7px;
+                    border-radius: 0 10000px 10000px 0;
+                    margin: 0;
+                    background: map-get($map: $theme-colors, $key: secondary);
+                    color: map-get($map: $theme-colors, $key: primary);
+                  }
+        
+                  &.search-field {
+                    padding: 10px;
+                    border-radius: 10000px 0 0 10000px;
+                    margin: 0 0 0 10px;
+                    background: rgba(255,255,255,0.1);
+                    color: map-get($map: $theme-colors, $key: secondary);
+                  }
+        
+                  &.search-submit:hover {
+                    background: map-get($map: $theme-colors, $key: tertiary);
+                    color: map-get($map: $theme-colors, $key: secondary);
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -114,9 +183,82 @@ header {
     .nav-primary {
       display: none;
 
-      @media (min-width: map-get($map: $theme-breakpoints, $key: notebook)) {
+      @media (min-width: map-get($map: $theme-breakpoints, $key: desktop)) {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
+      }
+
+      li.search-form {
+        position: relative;
+      
+        &:hover img.search-icon {
+          opacity: 0;
+        }
+      
+        &:hover form.search-form {
+          opacity: 1;
+      
+          & label,
+          & input {
+            transform: scaleX(1);
+          }
+        }
+      
+        img.search-icon {
+          display: inline;
+          position: absolute;
+          transition: 100ms;
+          width: 30px;
+          margin: 0 10px;
+          z-index: 10;
+        }
+      
+        form.search-form {
+          position: absolute;
+          opacity: 0;
+          transition: 50ms;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+      
+          & label,
+          & input {
+            transition: 100ms all;
+            transform: scaleX(0);
+          }
+      
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      form.search-form {
+        input {
+          border: none;
+          transition: 300ms;
+
+          &.search-submit {
+            padding: 7px;
+            border-radius: 0 10000px 10000px 0;
+            margin: 0;
+            background: map-get($map: $theme-colors, $key: secondary);
+            color: map-get($map: $theme-colors, $key: primary);
+          }
+
+          &.search-field {
+            padding: 10px;
+            border-radius: 10000px 0 0 10000px;
+            margin: 0 0 0 10px;
+            background: rgba(255,255,255,0.1);
+            color: map-get($map: $theme-colors, $key: secondary);
+          }
+
+          &.search-submit:hover {
+            background: map-get($map: $theme-colors, $key: tertiary);
+            color: map-get($map: $theme-colors, $key: secondary);
+          }
+        }
       }
 
       ul {
@@ -134,8 +276,35 @@ header {
           &:hover a {
             color: map-get($map: $theme-colors, $key: tertiary);
           }
+
+          a.social_nav_link {
+            position: relative;
+            margin: 0 10px; 
+
+            img {
+              position: absolute;
+              left: 0;
+              // top: 0;
+              transition: 300ms;
+              width: 30px;
+              height: 30px;
+              display: inline-block;
+
+              &.social_nav_img:hover {
+                opacity: 0;
+              }
+            }
+          }
         }
       }
     }
   }
 }
+
+//wpml flags
+.wpml-ls-menu-item .wpml-ls-flag {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
